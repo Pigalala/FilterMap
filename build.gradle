@@ -29,7 +29,36 @@ test {
 publishing {
     publications {
         maven(MavenPublication) {
+            groupId = 'dev.piggle'
+            artifactId = 'FilterMap'
+            version = project.version.toString()
+
             from components.java
+
+            pom {
+                name.set artifactId
+                description.set project.description
+
+                issueManagement {
+                    system.set 'GitHub'
+                    url.set 'https://github.com/Pigalala/FilterMap/issues'
+                }
+
+                developers {
+                    developer {
+                        id.set 'pigalala'
+                        name.set 'Piggle'
+                        email.set 'w8888mc@gmail.com'
+                    }
+                }
+
+                licenses {
+                    license {
+                        name.set 'MIT'
+                        url.set 'https://github.com/Pigalala/FilterMap/blob/master/LICENSE'
+                    }
+                }
+            }
         }
     }
 }
