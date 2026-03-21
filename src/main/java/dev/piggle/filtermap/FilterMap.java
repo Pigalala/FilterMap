@@ -50,7 +50,7 @@ public final class FilterMap<T, U> implements Gatherer<T, Void, U> {
         return new FilterMap<>(in -> mapper.apply(in).orElse(null));
     }
 
-    /// Creates a FilterMap instance where instances of a given class are mapped, the rest are discarded.
+    /// Creates a FilterMap instance where instances of a given class are kept and the rest are discarded.
     /// @param target The class that each object will be after the map
     @SuppressWarnings("unchecked")
     public static <T, U> FilterMap<T, U> filterInstanceOf(Class<U> target) {
