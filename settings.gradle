@@ -1,1 +1,21 @@
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+
+plugins {
+    id 'com.gradleup.nmcp.settings' version '1.4.4'
+}
+
 rootProject.name = 'FilterMap'
+
+nmcpSettings {
+    centralPortal {
+        username = System.getenv("SONATYPE_USERNAME")
+        password = System.getenv("SONATYPE_PASSWORD")
+        publishingType = "AUTOMATIC"
+
+        publicationName = "FilterMap:$version"
+
+        validationTimeout = Duration.of(30, ChronoUnit.MINUTES)
+        publishingTimeout = Duration.ZERO
+    }
+}

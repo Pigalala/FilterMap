@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
 }
 
 repositories {
@@ -31,4 +32,9 @@ publishing {
             from components.java
         }
     }
+}
+
+signing {
+    useInMemoryPgpKeys System.getenv("SIGNING_KEY"), System.getenv("SIGNING_PASSWORD")
+    sign publishing.publications.maven
 }
