@@ -39,6 +39,18 @@ publishing {
                 name.set artifactId
                 description.set project.description
 
+                scm {
+                    connection.set 'scm:git:git://github.com/Pigalala/FilterMap.git'
+                    developerConnection.set 'scm:git:git@github.com:Pigalala/FilterMap.git'
+                    url.set 'https://github.com/Pigalala/FilterMap'
+                    tag.set System.getenv('TAG_VERSION') == null ? 'HEAD' : System.getenv('TAG_VERSION')
+                }
+
+                ciManagement {
+                    system.set 'Github Actions'
+                    url.set 'https://github.com/Pigalala/FilterMap/actions'
+                }
+
                 issueManagement {
                     system.set 'GitHub'
                     url.set 'https://github.com/Pigalala/FilterMap/issues'
