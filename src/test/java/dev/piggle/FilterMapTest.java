@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FilterMapTest {
 
@@ -70,5 +71,16 @@ public class FilterMapTest {
                 .toList();
 
         assertEquals(integers, List.of(1, 2, 3));
+    }
+
+    @Test
+    void testExceptions() {
+        assertThrows(Exception.class, () -> Math.toIntExact(Long.MAX_VALUE));
+
+        List<Integer> what = Stream.of(2L, Long.MAX_VALUE /* This should cause an exception */)
+                .gather(FilterMap.filterNoException(Math::toIntExact, _ -> {}))
+                .toList();
+
+        assertEquals(what, List.of(2));
     }
 }

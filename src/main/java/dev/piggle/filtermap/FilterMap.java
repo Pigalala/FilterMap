@@ -3,6 +3,7 @@ package dev.piggle.filtermap;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Gatherer;
@@ -60,6 +61,18 @@ public final class FilterMap<T, U> implements Gatherer<T, Void, U> {
             }
 
             return null;
+        });
+    }
+
+    /// Creates a FilterMap instance where mappings that cause an exception are caught, allowing the filtermap to continue.
+    public static <T, U> FilterMap<T, U> filterNoException(Function<T, U> function, Consumer<Exception> exceptionConsumer) {
+        return new FilterMap<>(in -> {
+            try {
+                return function.apply(in);
+            } catch (Exception e) {
+                exceptionConsumer.accept(e);
+                return null;
+            }
         });
     }
 }
